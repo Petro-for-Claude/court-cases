@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="uk"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Мої справи — Електронний суд</title>
+<style>
+:root{color-scheme:light;}*{box-sizing:border-box;}
+body{margin:0;background:#f4f6f9;color:#1a2332;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;}
+.wrap{max-width:1500px;margin:0 auto;padding:18px 16px 60px;}
+h1{font-size:20px;margin:0 0 2px;}
+.sub{color:#5a6b82;font-size:13px;margin-bottom:14px;}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px;}
+.stat{background:#fff;border:1px solid #e2e8f2;border-radius:10px;padding:8px 12px;}
+.stat b{font-size:18px;display:block;color:#0b4aa2;}
+.stat span{font-size:11px;color:#5a6b82;text-transform:uppercase;letter-spacing:.03em;}
+.upd{margin-left:auto;font-size:12px;color:#5a6b82;text-align:right;}
+.upd b{color:#1a2332;}
+.controls{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}.searchrow{display:flex;gap:8px;align-items:center;}.searchrow input[type=text]{flex:1;min-width:200px;}.zoom{display:flex;align-items:center;gap:4px;flex:none;}.zoom button{width:32px;height:34px;border:1px solid #cdd6e4;border-radius:8px;background:#fff;font-size:18px;line-height:1;cursor:pointer;color:#33465f;}.zoom button:hover{background:#eef2f8;}.zoom span{font-size:12px;color:#5a6b82;min-width:42px;text-align:center;}.filters{display:flex;flex-direction:column;gap:8px;max-width:460px;}.filters select{width:100%;}
+input[type=text],select{padding:8px 10px;border:1px solid #cdd6e4;border-radius:8px;font-size:13px;background:#fff;}
+input[type=text]{flex:1;min-width:220px;}
+.count{font-size:12px;color:#5a6b82;margin:6px 2px;}
+.tablewrap{background:#fff;border:1px solid #e2e8f2;border-radius:12px;overflow:auto;}
+table{border-collapse:collapse;width:100%;}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid #eef1f6;vertical-align:top;}
+th{background:#f0f4fa;position:sticky;top:0;cursor:pointer;user-select:none;font-size:12px;color:#33465f;white-space:nowrap;z-index:1;}
+th:hover{background:#e3ecf7;}
+th .arw{color:#0b4aa2;font-size:10px;}
+td.num{font-weight:600;white-space:nowrap;}
+tr.main{cursor:pointer;}
+tr.main:hover td{background:#f8fbff;}
+.party{max-width:210px;font-size:13px;}
+.predmet{max-width:300px;color:#33465f;}
+.muted{color:#b2bccb;}
+.chip{display:inline-block;font-size:10px;padding:1px 7px;border-radius:20px;vertical-align:middle;}
+.chip.ok{background:#e3f6e8;color:#0a7d33;}
+.chip.no{background:#eef2f8;color:#8a97a8;}
+.note{color:#8a97a8;}.note.has{color:#0a7d33;font-weight:500;}
+.exp{font-size:11px;color:#0b4aa2;white-space:nowrap;}
+tr.detail td{background:#f7faff;border-bottom:2px solid #e2e8f2;padding:0;}
+.dwrap{padding:12px 16px 14px;}
+.dgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+@media (max-width:760px){.dgrid{grid-template-columns:1fr;}}
+.dsec h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:#0b4aa2;}
+.prow{margin:2px 0;font-size:13px;}.prow b{color:#33465f;font-weight:600;}
+.inst{margin:4px 0;padding:6px 10px;background:#fff;border:1px solid #e2e8f2;border-radius:8px;font-size:13px;}
+.inst .lvl{font-weight:600;color:#0b4aa2;}.inst .crt{color:#33465f;}
+.foot{margin-top:14px;font-size:11px;color:#8a97a8;line-height:1.5;}
+.arch-h{margin:26px 2px 6px;font-size:15px;color:#8a3b1a;border-top:2px solid #e2e8f2;padding-top:16px;cursor:pointer;user-select:none;display:flex;align-items:center;gap:8px;}
+.arch-h:hover{color:#b04a1f;}.arch-h .tgl{color:#8a3b1a;font-size:12px;}
+.arch-sub{font-size:12px;color:#a08a7a;font-weight:400;}
+.decbox{margin-top:12px;border:1px solid #e2e8f2;border-radius:8px;background:#fff;}.decbox>summary{cursor:pointer;padding:9px 12px;font-size:12px;font-weight:600;color:#0b4aa2;text-transform:uppercase;letter-spacing:.03em;list-style:none;}.decbox>summary::-webkit-details-marker{display:none;}.decbox>summary::before{content:"▸ ";}.decbox[open]>summary::before{content:"▾ ";}.decbox[open]>summary{border-bottom:1px solid #eef1f6;}.decwrap{overflow:auto;max-height:340px;}.dectab{border-collapse:collapse;width:100%;font-size:12px;}.dectab th{position:sticky;top:0;background:#f0f4fa;color:#33465f;text-align:left;padding:6px 8px;white-space:nowrap;border-bottom:1px solid #e2e8f2;}.dectab th.ds{cursor:pointer;user-select:none;}.dectab th.ds:hover{background:#e3ecf7;}.dectab th .a{color:#0b4aa2;font-size:10px;}.dectab td{padding:5px 8px;border-bottom:1px solid #f0f2f6;vertical-align:top;}.dectab a{color:#0b4aa2;text-decoration:none;font-weight:600;}.dectab a:hover{text-decoration:underline;}
+</style></head>
+<body><div class="wrap">
+<h1>Мої справи — Електронний суд</h1>
+<div class="sub">Кабінет: ПЕТРО ВАСИЛЬЄВ (як представник) · cabinet.court.gov.ua · деталі: кабінет + Verdictum</div>
+<div class="bar">
+  <div class="stat"><b id="s-total">0</b><span>усього справ</span></div>
+  <div class="stat"><b id="s-shown">0</b><span>показано</span></div>
+  <div class="stat"><b id="s-done">0</b><span>опрацьовано</span></div>
+  <div class="stat"><b id="s-upd">0</b><span>з оновленнями</span></div>
+  <div class="upd">Список зібрано: <b>21.07.2026</b><br>Опрацьовано детально: <b id="donetxt">0</b> · Оновлення повідомлень: <b id="lastrun">—</b></div>
+</div>
+<div class="controls">
+  <div class="searchrow"><input type="text" id="q" placeholder="Пошук за номером, судом, стороною, предметом…"><div class="zoom"><button id="zoomout" title="Зменшити">−</button><span id="zoomlvl">100%</span><button id="zoomin" title="Збільшити">+</button></div></div>
+  <div class="filters">
+  <select id="fcourt"><option value="">Усі суди</option></select>
+  <select id="fpos"><option value="">Усі позивачі</option></select>
+  <select id="fvid"><option value="">Усі відповідачі</option></select>
+  </div>
+</div>
+<div class="count" id="count"></div>
+<div class="tablewrap"><table id="t"><thead><tr>
+  <th data-k="i">#<span class="arw"></span></th>
+  <th data-k="num">Номер справи<span class="arw"></span></th>
+  <th data-k="pos">Позивач<span class="arw"></span></th>
+  <th data-k="vid">Відповідач<span class="arw"></span></th>
+  <th data-k="predmet">Предмет спору<span class="arw"></span></th>
+  <th data-k="court">Суд (поточний)<span class="arw"></span></th>
+  <th data-k="d1">Перш. док.<span class="arw"></span></th>
+  <th data-k="d2">Ост. док.<span class="arw">▼</span></th>
+  <th data-k="note">Нові повідомлення<span class="arw"></span></th>
+</tr></thead><tbody id="tb"></tbody></table></div>
+<h2 class="arch-h" id="archh"></h2>
+<div class="tablewrap" id="archwrap" style="display:none"><table><thead><tr><th>#</th><th>Номер справи</th><th>Позивач</th><th>Відповідач</th><th>Предмет спору</th><th>Суд (поточний)</th><th>Перш. док.</th><th>Ост. док.</th><th>Нові повідомлення</th></tr></thead><tbody id="tba"></tbody></table></div>
+<div class="foot">
+Позивач і відповідач — окремі колонки. Клік по рядку опрацьованої справи (✓) розгортає повні деталі: усі сторони, склад суду по інстанціях (суддя 1-ї інстанції, колегії апеляції/касації — доповідач та члени) і предмет спору. Джерела: кабінет Електронного суду + Verdictum. Колонку «Нові повідомлення» заповнює щоденна задача об 11:00. Розділ «АРХІВ» (останній документ раніше 22.07.2025) згорнуто й не бере участі в пошуку та сортуванні активних справ — розгортається кліком по заголовку.
+</div>
+</div>
+<script src="data.js"></script>
+<script>
+let sortKey="d2",sortDir=-1,openRow=null,archOpen=false;
+const decSort={};
+const tb=document.getElementById("tb"),q=document.getElementById("q"),fcourt=document.getElementById("fcourt"),fpos=document.getElementById("fpos"),fvid=document.getElementById("fvid");
+function baseP(p){return (p||"").split(" (в особі")[0].trim();}
+function pd(s){if(!s)return 0;const p=s.split(".");return new Date(+p[2],+p[1]-1,+p[0]).getTime();}
+function esc(s){return (s==null?"":s.toString()).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function cmp(a,b){let x=a[sortKey],y=b[sortKey];if(sortKey==="d1"||sortKey==="d2"){x=pd(x);y=pd(y);}else if(sortKey==="i"){x=+x;y=+y;}else{return (x||"").toString().localeCompare((y||"").toString(),"uk")*sortDir;}return (x<y?-1:x>y?1:0)*sortDir;}
+const CUT=pd("22.07.2025");
+const ACTIVE=DATA.filter(r=>pd(r.d2)>=CUT);
+const ARCHIVE=DATA.filter(r=>pd(r.d2)<CUT).slice().sort((a,b)=>pd(b.d2)-pd(a.d2));
+function decRows(list){return list.map(d=>'<tr><td><a href="https://reyestr.court.gov.ua/Review/'+esc(d.id)+'" target="_blank" rel="noopener">'+esc(d.id)+'</a></td><td>'+esc(d.form)+'</td><td>'+esc(d.du)+'</td><td>'+esc(d.dz)+'</td><td>'+esc(d.proc)+'</td><td>'+esc(d.court)+'</td><td>'+esc(d.judge)+'</td></tr>').join("");}
+function decCmp(a,b,k){if(k==="du")return pd(a.du)-pd(b.du);return (a[k]||"").localeCompare((b[k]||""),"uk");}
+function attachDec(container){container.querySelectorAll(".dectab th.ds").forEach(th=>th.addEventListener("click",e=>{e.stopPropagation();const tbl=th.closest("table"),num=tbl.dataset.num,row=DATA.find(r=>r.num===num);if(!row||!row.decisions)return;const k=th.dataset.k;let st=decSort[num]||{k:null,dir:1};if(st.k===k)st.dir*=-1;else{st.k=k;st.dir=1;}decSort[num]=st;row.decisions.sort((a,b)=>decCmp(a,b,k)*st.dir);tbl.querySelector("tbody").innerHTML=decRows(row.decisions);tbl.querySelectorAll("th.ds .a").forEach(a=>a.textContent="");th.querySelector(".a").textContent=st.dir===1?" \u25b2":" \u25bc";}));}
+function detailHTML(r){
+  let ph="";if(r.parties){for(const k in r.parties){ph+='<div class="prow"><b>'+esc(k)+':</b> '+r.parties[k].map(esc).join("; ")+'</div>';}}else if(r.pos||r.vid){if(r.pos)ph+='<div class="prow"><b>Позивач:</b> '+esc(r.pos)+'</div>';if(r.vid)ph+='<div class="prow"><b>Відповідач:</b> '+esc(r.vid)+'</div>';}
+  let ih="";if(r.instances){r.instances.forEach(x=>{ih+='<div class="inst"><span class="lvl">'+esc(x.level)+'</span> — <span class="crt">'+esc(x.court)+'</span><br>'+esc(x.judges)+'</div>';});}
+  let dec="";
+  if(r.decisions&&r.decisions.length){
+    dec='<details class="decbox"><summary>Судові рішення в ЄДРСР ('+r.decisions.length+')</summary><div class="decwrap"><table class="dectab" data-num="'+esc(r.num)+'"><thead><tr><th>№ рішення</th><th class="ds" data-k="form">Форма<span class="a"></span></th><th class="ds" data-k="du">Дата ухвал.<span class="a"></span></th><th>Набрання зак. сили</th><th>Форма судоч.</th><th class="ds" data-k="court">Суд<span class="a"></span></th><th>Суддя</th></tr></thead><tbody>'+decRows(r.decisions)+'</tbody></table></div></details>';
+  } else if(r.done){
+    dec='<details class="decbox"><summary>Судові рішення в ЄДРСР</summary><div class="decwrap"><div class="prow" style="padding:8px 12px;color:#8a97a8">Дані ще збираються…</div></div></details>';
+  }
+  return '<tr class="detail"><td colspan="9"><div class="dwrap"><div class="dgrid">'+
+    '<div class="dsec"><h4>Сторони спору (повністю)</h4>'+(ph||'<div class="prow">—</div>')+'</div>'+
+    '<div class="dsec"><h4>Склад суду по інстанціях</h4>'+(ih||'<div class="prow">—</div>')+
+      '<h4 style="margin-top:10px">Предмет спору</h4><div class="prow">'+(esc(r.predmet)||'—')+'</div></div>'+
+    '</div>'+dec+'</div></td></tr>';
+}
+function rowsHTML(list){
+  let h="";
+  list.forEach(r=>{
+    const chip=r.done?'<span class="chip ok">✓</span>':'<span class="chip no">—</span>';
+    const pos=r.pos?esc(r.pos):'<span class="muted">—</span>';
+    const vid=r.vid?esc(r.vid):'<span class="muted">—</span>';
+    const pred=r.predmet?esc(r.predmet):'<span class="muted">ще не опрацьовано</span>';
+    const noteCls=r.note?"note has":"note",noteTxt=r.note?esc(r.note):"—";
+    h+='<tr class="main" data-i="'+r.i+'">'+
+      '<td>'+r.i+'</td>'+
+      '<td class="num">'+esc(r.num)+' '+chip+'<div class="exp">'+(r.done?'▾ деталі':'')+'</div></td>'+
+      '<td class="party">'+pos+'</td>'+
+      '<td class="party">'+vid+'</td>'+
+      '<td class="predmet">'+pred+'</td>'+
+      '<td>'+esc(r.court)+'</td>'+
+      '<td>'+esc(r.d1)+'</td>'+
+      '<td>'+esc(r.d2)+'</td>'+
+      '<td class="'+noteCls+'">'+noteTxt+'</td></tr>';
+    if(openRow===r.i&&r.done){h+=detailHTML(r);}
+  });
+  return h;
+}
+function bind(container,rerender){container.querySelectorAll("tr.main").forEach(tr=>tr.addEventListener("click",()=>{const i=+tr.dataset.i;openRow=(openRow===i?null:i);rerender();}));}
+function render(){
+  const term=q.value.trim().toLowerCase(),cf=fcourt.value,pf=fpos.value,vf=fvid.value;
+  let list=ACTIVE.filter(r=>{
+    if(cf&&r.court!==cf)return false;
+    if(pf&&!(r.pos||"").includes(pf))return false;
+    if(vf&&!(r.vid||"").includes(vf))return false;
+    if(term){const hay=(r.num+" "+r.edrsr+" "+r.court+" "+r.status+" "+r.predmet+" "+r.pos+" "+r.vid).toLowerCase();if(!hay.includes(term))return false;}
+    return true;
+  });
+  list.sort(cmp);
+  tb.innerHTML=rowsHTML(list);
+  bind(tb,render);
+  attachDec(tb);
+  document.getElementById("s-total").textContent=DATA.length;
+  document.getElementById("s-shown").textContent=list.length;
+  document.getElementById("s-done").textContent=DATA.filter(r=>r.done).length;
+  document.getElementById("s-upd").textContent=DATA.filter(r=>r.note).length;
+  document.getElementById("donetxt").textContent=DATA.filter(r=>r.done).length+" із "+DATA.length;
+  document.getElementById("count").textContent="Активні: показано "+list.length+" із "+ACTIVE.length+" (архів окремо: "+ARCHIVE.length+")";
+}
+function renderArchive(){const tba=document.getElementById("tba");tba.innerHTML=rowsHTML(ARCHIVE);bind(tba,renderArchive);}
+const archh=document.getElementById("archh"),archwrap=document.getElementById("archwrap");
+archh.innerHTML='<span class="tgl">&#9656;</span> АРХІВ <span class="arch-sub">('+ARCHIVE.length+' справ · останній документ раніше 22.07.2025 · натисніть, щоб розгорнути)</span>';
+archh.addEventListener("click",()=>{archOpen=!archOpen;archwrap.style.display=archOpen?"":"none";archh.querySelector(".tgl").innerHTML=archOpen?"&#9662;":"&#9656;";if(archOpen)renderArchive();else document.getElementById("tba").innerHTML="";});
+[...new Set(ACTIVE.map(r=>r.court))].sort((a,b)=>a.localeCompare(b,"uk")).forEach(c=>{const o=document.createElement("option");o.value=c;o.textContent=c;fcourt.appendChild(o);});
+const posSet=new Set();ACTIVE.forEach(r=>{if(r.pos)posSet.add(baseP(r.pos));});[...posSet].sort((a,b)=>a.localeCompare(b,"uk")).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;fpos.appendChild(o);});
+const vidSet=new Set();ACTIVE.forEach(r=>{if(r.vid)r.vid.split(";").forEach(x=>{x=x.trim();if(x)vidSet.add(x);});});[...vidSet].sort((a,b)=>a.localeCompare(b,"uk")).forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;fvid.appendChild(o);});
+document.querySelectorAll("#t th").forEach(th=>{th.addEventListener("click",()=>{const k=th.dataset.k;if(!k)return;if(sortKey===k)sortDir*=-1;else{sortKey=k;sortDir=(k==="d1"||k==="d2")?-1:1;}document.querySelectorAll("#t th .arw").forEach(a=>a.textContent="");th.querySelector(".arw").textContent=sortDir===1?"▲":"▼";render();});});
+q.addEventListener("input",render);fcourt.addEventListener("change",render);fpos.addEventListener("change",render);fvid.addEventListener("change",render);
+let zoom=1;const zl=document.getElementById("zoomlvl");
+function setZoom(z){zoom=Math.min(3,Math.max(0.3,Math.round(z*100)/100));document.body.style.zoom=zoom;zl.textContent=Math.round(zoom*100)+"%";}
+document.getElementById("zoomin").addEventListener("click",()=>setZoom(zoom+0.1));
+document.getElementById("zoomout").addEventListener("click",()=>setZoom(zoom-0.1));
+window.addEventListener("wheel",e=>{if(e.ctrlKey){e.preventDefault();setZoom(zoom+(e.deltaY<0?0.1:-0.1));}},{passive:false});
+window.addEventListener("keydown",e=>{if(e.ctrlKey||e.metaKey){if(e.key==="="||e.key==="+"){e.preventDefault();setZoom(zoom+0.1);}else if(e.key==="-"){e.preventDefault();setZoom(zoom-0.1);}else if(e.key==="0"){e.preventDefault();setZoom(1);}}});
+setZoom(1);
+render();
+</script></body></html>
