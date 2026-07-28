@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="uk"><head><meta charset="utf-8">
+<html lang="uk"><head>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Мої справи — Електронний суд</title>
 <style>
@@ -85,7 +89,7 @@ tr.detail td{background:#f7faff;border-bottom:2px solid #e2e8f2;padding:0;}
 Позивач і відповідач — окремі колонки. Клік по рядку опрацьованої справи (✓) розгортає повні деталі: усі сторони, склад суду по інстанціях (суддя 1-ї інстанції, колегії апеляції/касації — доповідач та члени) і предмет спору. Джерела: кабінет Електронного суду + Verdictum. Колонку «Повідомлення» оновлює обробка листів «Електронного суду» (на вимогу): показано дату останнього повідомлення; клік розгортає весь список подій (дата · подія · суд), він також є у блоці «деталі». Колонка сортується за датою останнього повідомлення. Позначка 🔎 — рішення згадане у листі, але ще не з’явилося в ЄДРСР. Розділ «АРХІВ» (останній документ або повідомлення понад рік тому) згорнуто й не бере участі в пошуку та сортуванні активних справ — розгортається кліком по заголовку.
 </div>
 </div>
-<script src="data.js"></script>
+<script>document.write('<scr'+'ipt src="data.js?v='+Date.now()+'"></scr'+'ipt>');</script>
 <script>
 let sortKey="d2",sortDir=-1,openRow=null,archOpen=false;
 const decSort={};
