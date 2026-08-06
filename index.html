@@ -161,7 +161,7 @@ function rowsHTML(list){
   });
   return h;
 }
-function bind(container,rerender){container.querySelectorAll("tr.main").forEach(tr=>tr.addEventListener("click",()=>{const i=+tr.dataset.i;openRow=(openRow===i?null:i);rerender();}));}
+function bind(container,rerender){container.querySelectorAll("tr.main").forEach(tr=>tr.addEventListener("click",()=>{if(window.getSelection&&String(window.getSelection()).trim().length>0)return;const i=+tr.dataset.i;openRow=(openRow===i?null:i);rerender();}));}
 function render(){
   const term=q.value.trim().toLowerCase(),cf=fcourt.value,pf=fpos.value,vf=fvid.value;
   let list=ACTIVE.filter(r=>{
