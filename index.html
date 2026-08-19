@@ -102,7 +102,7 @@ function pd(s){if(!s)return 0;const p=s.split(".");return new Date(+p[2],+p[1]-1
 function pdt(s){if(!s)return 0;const q=s.trim().split(/\s+/);const d=q[0].split(".");const t=(q[1]||"00:00").split(":");return new Date(+d[2],+d[1]-1,+d[0],+t[0]||0,+t[1]||0).getTime();}
 function esc(s){return (s==null?"":s.toString()).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function cmp(a,b){if(sortKey==="task"){var f=function(r){var d=caseTasks(r).filter(function(t){return !t.done&&t.due;}).map(function(t){return pd(t.due);});return d.length?Math.min.apply(null,d):null;};var xa=f(a),yb=f(b);if(xa===null&&yb===null)return 0;if(xa===null)return 1;if(yb===null)return -1;return (xa<yb?-1:xa>yb?1:0)*sortDir;}if(sortKey==="hearing"){const xa=a.hearing?pdt(a.hearing):null,yb=b.hearing?pdt(b.hearing):null;if(xa===null&&yb===null)return 0;if(xa===null)return 1;if(yb===null)return -1;return (xa<yb?-1:xa>yb?1:0)*sortDir;}let x=a[sortKey],y=b[sortKey];if(sortKey==="d1"||sortKey==="d2"){x=pd(x);y=pd(y);}else if(sortKey==="i"){x=+x;y=+y;}else if(sortKey==="ev"){x=a.events&&a.events.length?pd(a.events[0].d):0;y=b.events&&b.events.length?pd(b.events[0].d):0;}else{return (x||"").toString().localeCompare((y||"").toString(),"uk")*sortDir;}return (x<y?-1:x>y?1:0)*sortDir;}
-const LASTUPD="17.08.2026";
+const LASTUPD="19.08.2026";
 function lastAct(r){let t=pd(r.d2);if(r.events&&r.events.length){for(const e of r.events){const et=pd(e.d);if(et>t)t=et;}}if(r.hearing){const ht=pdt(r.hearing);if(ht>t)t=ht;}return t;}
 const CUT=(function(){const d=new Date(pd(LASTUPD));d.setFullYear(d.getFullYear()-1);return d.getTime();})();
 const ACTIVE=DATA.filter(r=>lastAct(r)>=CUT);
