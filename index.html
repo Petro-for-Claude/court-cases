@@ -29,6 +29,7 @@ th{background:#f0f4fa;position:sticky;top:0;cursor:pointer;user-select:none;font
 th:hover{background:#e3ecf7;}
 th .arw{color:#0b4aa2;font-size:10px;}
 td.num{font-weight:600;white-space:nowrap;}
+a.eslink{display:block;margin-top:3px;font-size:11px;font-weight:500;color:#1f6feb;text-decoration:none;}a.eslink:hover{text-decoration:underline;}
 tr.main{cursor:pointer;}
 tr.main:hover td{background:#f8fbff;}
 .party{max-width:210px;font-size:13px;}
@@ -127,7 +128,7 @@ function detailHTML(r){
   return '<tr class="detail"><td colspan="10"><div class="dwrap"><div class="dgrid">'+
     '<div class="dsec"><h4>Сторони спору (повністю)</h4>'+(ph||'<div class="prow">—</div>')+'</div>'+
     '<div class="dsec"><h4>Склад суду по інстанціях</h4>'+(ih||'<div class="prow">—</div>')+
-      '<h4 style="margin-top:10px">Предмет спору</h4><div class="prow">'+(esc(r.predmet)||'—')+'</div></div>'+
+      (r.ecourt?'<h4 style="margin-top:10px">Електронний суд</h4><div class="prow"><a href="'+esc(r.ecourt)+'" target="_blank" rel="noopener">Картка справи в кабінеті ЕС ↗</a></div>':'')+'<h4 style="margin-top:10px">Предмет спору</h4><div class="prow">'+(esc(r.predmet)||'—')+'</div></div>'+
     '</div>'+ev+tk+dec+'</div></td></tr>';
 }
 function evList(r){if(!r.events||!r.events.length)return "";return '<div class="evwrap">'+r.events.map(function(e){return '<div class="evrow"><span class="evd">'+esc(e.d)+'</span> <b>'+esc(e.e)+'</b>'+(e.q?' <span class="evq">\uD83D\uDD0E очікує в ЄДРСР</span>':'')+'<div class="eva">'+esc(e.a)+'</div></div>';}).join("")+'</div>';}
@@ -150,7 +151,7 @@ function rowsHTML(list){
     const pred=r.predmet?esc(r.predmet):'<span class="muted">ще не опрацьовано</span>';
     h+='<tr class="main" data-i="'+r.i+'">'+
       '<td class="hearcell">'+(function(){const ex=(r.hearingsExtra||[]).filter(x=>x&&x.h&&pdt(x.h)>=Date.now()-864e5);let h=r.hearing?esc(r.hearing):(ex.length?'':'<span class="muted">—</span>');for(const x of ex)h+='<div class="hearx">'+esc(x.h)+(x.a?' <span class="hearxa">('+esc(x.a)+')</span>':'')+'</div>';return h;})()+'</td>'+
-      '<td class="num">'+esc(r.num)+' '+chip+'<div class="exp">▾ деталі</div></td>'+
+      '<td class="num">'+esc(r.num)+' '+chip+(r.ecourt?'<a class="eslink" href="'+esc(r.ecourt)+'" target="_blank" rel="noopener" onclick="event.stopPropagation()" title="Відкрити справу в Електронному суді">⚖ Ел. суд ↗</a>':'')+'<div class="exp">▾ деталі</div></td>'+
       '<td class="party">'+pos+'</td>'+
       '<td class="party">'+vid+'</td>'+
       '<td class="predmet">'+pred+'</td>'+
